@@ -129,7 +129,7 @@ module.exports.login = async (req, res) => {
 			} = perviousUserData[0];
 
 			// for the first time login
-			if (!data.status && data.password === password) {
+			if (!perviousUserData.status && data.password === password) {
 				// return created token
 				return res.json({
 					status: true,
@@ -179,10 +179,12 @@ module.exports.login = async (req, res) => {
 	}
 };
 
-// PUT single object
+// update single object
 module.exports.put = async (req, res) => {
 	try {
 		const data = req.body;
+		data.dateOfBirth = Number(new Date(data.dateOfBirth));
+		console.log(data);
 
 		if (!data.status) {
 			if (!data.password) {

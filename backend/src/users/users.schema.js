@@ -7,7 +7,7 @@ const permissionList = require('../../config/permissionConfig').userRoles;
 module.exports.create = joi.object().keys({
 	firstName: joi.string().required(),
 	lastName: joi.string().required(),
-	dateOfBirth: joi.number(),
+	dateOfBirth: joi.string(),
 	email: joi.string().required(),
 	mobile: joi.string(),
 	password: joi.string().required(),
@@ -19,7 +19,7 @@ module.exports.put = joi.object().keys({
 	id: joi.string().required().max(24).min(24),
 	firstName: joi.string(),
 	lastName: joi.string(),
-	dateOfBirth: joi.number(),
+	dateOfBirth: joi.string(),
 	password: joi.string(),
 	email: joi.string(),
 	mobile: joi.string(),
