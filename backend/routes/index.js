@@ -12,5 +12,6 @@ router.use(express.text({ limit: '50mb', type: '*/xml' }));
 router.use('/users', require('../src/users/users.router'));
 
 // set notes router
+router.use('/notes', require('../src/notes/notes.router'));
 
 module.exports = router;

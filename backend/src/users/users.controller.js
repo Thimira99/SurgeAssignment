@@ -24,7 +24,6 @@ const createPasswordHash = (password) => {
 module.exports.getAll = async (req, res) => {
 	try {
 		const data = await userModel.find();
-		console.log(data);
 
 		return res.json({
 			status: true,
