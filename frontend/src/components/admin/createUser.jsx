@@ -1,6 +1,8 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 
 import createStyles from './createUser.module.scss';
+
+import Navbar from './adminNavbar/navbar';
 
 function CreateUser() {
 
@@ -12,9 +14,16 @@ function CreateUser() {
     const [password, setPassword] = useState('');
     const [accountType, setAccountType] = useState('');
 
+    const [LfirstName, setLFirstName] = useState('');
+
+    useEffect(() => {
+        const { firstName } = JSON.parse(localStorage.getItem('user'));
+        setLFirstName(firstName);
+    }, [])
+
     return (
         <div>
-            <h1>Create Form</h1>
+            <Navbar firstName={LfirstName} />
             <div className={createStyles.form_container}>
                 <form className={createStyles.form} >
                     <h1>Create Account</h1>
@@ -59,7 +68,8 @@ function CreateUser() {
                         name='password'
                         required
                         className={createStyles.input}
-                    /><input
+                    />
+                    <input
                         type='text'
                         placeholder='Account Type'
                         name='mobile'
