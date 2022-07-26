@@ -64,7 +64,7 @@ function ViewUsers() {
                                     <td>{user.email}</td>
                                     <td>{user.dateOfBirth}</td>
                                     <td>{user.mobile}</td>
-                                    <td>{user.status.JSON}</td>
+                                    <td>{`${user.status}`}</td>
                                     <td>{user.accountType}</td>
                                 </tr>
 

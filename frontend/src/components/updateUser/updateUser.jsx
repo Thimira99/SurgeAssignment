@@ -65,7 +65,6 @@ function UpdateUser() {
         e.preventDefault();
 
         const data = {
-            id,
             firstName,
             lastName,
             email,
@@ -76,11 +75,10 @@ function UpdateUser() {
             accountType
         }
 
-        console.log(data);
-        axios.put("http://localhost:8000/api/users", data).then((res) => {
-            if (res.data.status === true) {
-                history.push('/login');
-            }
+        axios.put(`http://localhost:8000/api/users/${id}`, data).then((res) => {
+            console.log(res.data)
+            localStorage.removeItem('user');
+            history.push('/login');
         }).catch(err => {
             console.log(err);
         })
