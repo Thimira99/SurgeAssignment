@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 
 //import jwt decorder
 import jwt from 'jwt-decode';
@@ -11,10 +11,7 @@ import axios from 'axios';
 
 //import useHistory
 import { useHistory } from 'react-router-dom';
-
-//import popup
-import Popup from '../popup/popup';
-
+import { toastMsg } from '../toast';
 
 function Login() {
 
@@ -25,6 +22,14 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    //get token
+    useEffect(() => {
+        //check if user exists
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user && user.id) {
+            user.accountType === 'student' ? history.push('/addNote') : history.push('/getUsers');
+        }
+    }, () => { })
 
     //handle email onchange
     function handleEmail(event) {
@@ -48,8 +53,7 @@ function Login() {
         //login 
         axios.post("http://localhost:8000/api/users/login", data).then((res) => {
 
-            <Popup />
-
+            toastMsg('Login success.');
             //set token to a variable
             const token = res.data.data;
 
@@ -69,7 +73,7 @@ function Login() {
         }).catch(err => {
             //error handling
             if (err.response.data.status === false) {
-                alert(err.response.data.msg)
+                toastMsg(err.response.data.msg, 'error')
             }
         })
     }

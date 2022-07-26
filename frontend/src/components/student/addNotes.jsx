@@ -15,11 +15,22 @@ import image from '../../images/monophy.gif'
 
 //import Navbar
 import Navbar from './studentNavbar/studentNavbar';
+
+//import Link from react router dom
 import { Link } from 'react-router-dom';
 
+//import bootstrap spinner
+import Spinner from 'react-bootstrap/Spinner';
+import { toastMsg } from '../toast';
+
 function AddNotes() {
-    const [id, setId] = useState('');
+
+    //initializing loading variablr
+    const [loading, setLoading] = useState(true);
+
+
     const [firstName, setFirstName] = useState('');
+    const [id, setId] = useState('');
 
     const [notes, setNotes] = useState([]);
 
@@ -31,51 +42,65 @@ function AddNotes() {
         setFirstName(firstName);
 
         //get notes by student id
-        console.log(id)
         axios.get(`http://localhost:8000/api/notes/getByUserId/${id}`).then(res => {
             if (res.data.data.length === 0) {
-                alert("You Dont Have Notes")
+                toastMsg("You Dont Have Notes", 'info')
             } else {
                 setNotes(res.data.data);
             }
+            setLoading(false);
+        }).catch(({ response }) => {
+            setLoading(false);
+
+            toastMsg(response.data.msg, 'error');
+
         })
     }, [])
 
     function handleDelete(id) {
-        axios.delete(`http://localhost:8000/api/notes//deleteById/${id}`).then(res => {
+        setLoading(true);
+
+        axios.delete(`http://localhost:8000/api/notes/deleteById/${id}`).then(res => {
             if (res.data.status === true) {
-                alert("Successfullt Deleted");
-                window.location.reload();
+                // window.location.reload();
+                toastMsg('Successfully Deleted.');
             }
         }).catch(err => {
-            alert(err)
+            toastMsg(err.response.data.msg, 'error');
         })
+        setLoading(false);
+
     }
 
     return (
         <div >
             <Navbar firstName={firstName} />
-            <h1>My Notes</h1>
+            <div className={styles.mainWrapper}>
+                <h1>My Notes</h1>
 
-            <Link to='/craeteNotes'>
-                <button className='btn btn-primary'>Add Notes</button>
-            </Link>
+                <Link to='/craeteNotes'>
+                    <button className='btn btn-primary'>Add Notes</button>
+                </Link>
 
 
-            <div className={styles.notes}>
-                {notes.map((value) => (
-                    <Card style={{ width: '15rem', display: "flex" }}>
-                        <Card.Img variant="top" style={{ width: "250px", height: "200px" }} src={image} />
-                        <Card.Body>
-                            <Card.Title>{value.title}</Card.Title>
-                            <Card.Text>{value.description}
-                            </Card.Text>
-                            <Link to={`/updateNotes/${value._id}`}><Button variant="primary">Update</Button></Link>
+                <div className={styles.notes}>
 
-                            <Button style={{ marginLeft: "3rem" }} variant="danger" onClick={() => handleDelete(value._id)}>Delete</Button>
-                        </Card.Body>
-                    </Card>
-                ))}
+                    {!loading ? notes.map((value) => (
+                        <Card id={styles.card} style={{ width: '15rem', display: "flex" }}>
+                            <Card.Img variant="top" style={{ width: "250px", height: "200px" }} src={image} />
+                            <Card.Body>
+                                <Card.Title>{value.title}</Card.Title>
+                                <Card.Text>{value.description}
+                                </Card.Text>
+                                <Link to={`/updateNotes/${value._id}`}><Button variant="primary">Update</Button></Link>
+
+                                <Button style={{ marginLeft: "3rem" }} variant="danger" onClick={() => handleDelete(value._id)}>Delete</Button>
+                            </Card.Body>
+                        </Card>
+                    )) : <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", marginTop: "100px" }}>
+                        <Spinner animation="border" variant="primary" />
+                    </div>}
+                </div>
             </div>
 
         </div>

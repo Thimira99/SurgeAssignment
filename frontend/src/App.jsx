@@ -1,5 +1,7 @@
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './components/login/login';
 import ViewUser from './components/admin/viewUsers';
@@ -25,6 +27,9 @@ function App() {
 
         <Redirect from="/" to="/login" component={Login} />
       </Switch>
+      <ToastContainer position="top-center"
+        autoClose={2000}
+        hideProgressBar={false} />
 
     </Router>
   );

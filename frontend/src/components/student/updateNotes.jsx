@@ -2,11 +2,17 @@ import axios from 'axios';
 import React, { Component, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
+//import bootstrap spinner
+import Spinner from 'react-bootstrap/Spinner';
+
 import addNote from './createNotes.module.scss';
+import { toastMsg } from '../toast';
 
 function UpdateNotes() {
 
     const history = useHistory();
+
+    const [loading, setLoading] = useState(true);
 
     const { id } = useParams();
 
@@ -16,8 +22,12 @@ function UpdateNotes() {
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/notes/getById/${id}`).then(res => {
+            setLoading(false);
             setTitle(res.data.data[0].title);
             setDescription(res.data.data[0].description);
+        }).catch(err => {
+            alert(err)
+            setLoading(false);
         })
 
 
@@ -43,17 +53,19 @@ function UpdateNotes() {
 
         axios.put(`http://localhost:8000/api/notes//updateById/${id}`, data).then(res => {
             if (res.data.status === true) {
-                alert("Updated Successfully");
                 history.push("/addNote");
+                toastMsg('update successfully.');
+
             }
         }).catch(err => {
-            alert(err);
+            toastMsg(err.response.data.msg, 'error');
+
         })
     }
 
     return (
         <div>
-            <div className={addNote.add_container}>
+            {!loading ? <div className={addNote.add_container}>
                 <div className={addNote.addform_container}>
                     <div className={addNote.form_container}>
                         <form className={addNote.form} onSubmit={handleSubmit}>
@@ -82,7 +94,10 @@ function UpdateNotes() {
                         </form>
                     </div>
                 </div>
-            </div >
+            </div > : <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+                <Spinner animation="border" variant="primary" />
+            </div>}
+
         </div>
     )
 }

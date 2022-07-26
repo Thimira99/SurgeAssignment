@@ -1,27 +1,45 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-import data from '../data.json';
+//import bootstrap spinner
+import Spinner from 'react-bootstrap/Spinner';
+
 import Navbar from './adminNavbar/navbar';
+import { createHeader } from './createHeader';
 import view from './viewUsers.module.scss';
 
 function ViewUsers() {
 
     const [id, setId] = useState('');
     const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+
+    const [data, setData] = useState([]);
+
+    //initializing loading variablr
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const { id, firstName, lastName } = JSON.parse(localStorage.getItem('user'));
+        const { id, firstName } = JSON.parse(localStorage.getItem('user'));
 
         setId(id);
         setFirstName(firstName);
-        setLastName(lastName);
+
+        const headers = createHeader();
+
+        axios.get("http://localhost:8000/api/users/", headers).then(res => {
+            setData(res.data.all);
+            setLoading(false);
+        }).catch(err => {
+            console.log(err);
+            setLoading(false);
+        })
+
     }, [])
 
     return (
         <div>
             <Navbar firstName={firstName} />
-            <div className={view.view_container}>
+            {!loading ? <div className={view.view_container}>
                 <h1>View All Users</h1>
                 <div className={view.table}>
                     <table class="table table-dark">
@@ -34,7 +52,6 @@ function ViewUsers() {
                                 <th scope="col">DateOfBirth</th>
                                 <th scope="col">Mobile</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Password</th>
                                 <th scope="col">AccontType</th>
                             </tr>
                         </thead>
@@ -47,9 +64,8 @@ function ViewUsers() {
                                     <td>{user.email}</td>
                                     <td>{user.dateOfBirth}</td>
                                     <td>{user.mobile}</td>
-                                    <td>{user.status}</td>
-                                    <td>{user.password}</td>
-                                    <td>{user.accontType}</td>
+                                    <td>{user.status.JSON}</td>
+                                    <td>{user.accountType}</td>
                                 </tr>
 
                             ))}
@@ -57,7 +73,10 @@ function ViewUsers() {
                     </table>
                 </div>
 
-            </div>
+            </div> : <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", marginTop: "100px" }}>
+                <Spinner animation="border" variant="primary" />
+            </div>}
+
         </div>
 
     )

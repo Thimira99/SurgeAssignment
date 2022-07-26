@@ -1,7 +1,15 @@
 .notes {
     display: flex;
     flex-wrap: wrap;
-    padding: 1rem;
-    justify-content: space-around;
-    margin-top: 2rem;
+    justify-content: flex-start;
+    margin: 2rem -0.2rem;
+
+    #card {
+        margin: 0.2rem;
+    }
+}
+
+.mainWrapper {
+    margin-top: 1rem;
+    padding: 0 2rem;
 }

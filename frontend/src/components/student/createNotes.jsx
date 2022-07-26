@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Component, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { toastMsg } from '../toast';
 
 import addNote from './createNotes.module.scss';
 
@@ -37,15 +38,14 @@ function CreateNotes() {
             description
         }
 
-        console.log(data);
-
         axios.post("http://localhost:8000/api/notes/add", data).then(res => {
             if (res.data.status === true) {
-                alert("Added Successfully")
+                toastMsg("Note added Successfully")
                 history.push('/addNote')
             }
-        }).catch(err => {
-            alert(err);
+        }).catch(({ response }) => {
+            toastMsg(response.data.msg, 'error')
+
         })
     }
 
