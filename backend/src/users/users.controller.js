@@ -12,6 +12,9 @@ const userModel = require('./users.model');
 // import bycrypt to hash the password
 const bcrypt = require('bcryptjs');
 
+//import nodemailer
+const nodemailer = require('nodemailer');
+
 
 
 const createPasswordHash = (password) => {
@@ -75,6 +78,31 @@ module.exports.createUser = async (req, res) => {
 			user = new userModel(user);
 			await user.save();
 		}
+
+		//email handler
+		var transporter = nodemailer.createTransport({
+			service: 'gmail',
+			auth: {
+				user: 'thimiraamarakoon99@gmail.com',
+				pass: 'uztixfovqeycjtvn'
+			}
+		});
+
+		var mailOption = {
+			from: 'thimiraamarakoon99@gmail.com',
+			to: user.email,
+			subject: 'Sending Password and Link',
+			text: `${user.password}
+			LOGIN URL: http://localhost:3000/login`
+		};
+
+		transporter.sendMail(mailOption, function (err, info) {
+			if (err) {
+				console.log(err)
+			} else {
+				console.log("Email Send")
+			}
+		})
 
 		return res.json({
 			status: true,
