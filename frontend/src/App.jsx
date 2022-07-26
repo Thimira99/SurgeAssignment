@@ -7,6 +7,9 @@ import CreateUser from './components/admin/createUser';
 import UpdateUser from './components/updateUser/updateUser';
 import AddNotes from './components/student/addNotes';
 
+import CreateNotes from './components/student/createNotes';
+import UpdateNotes from './components/student/updateNotes';
+
 
 function App() {
   return (
@@ -17,6 +20,8 @@ function App() {
         <Route exact path="/getUsers" component={ViewUser} />
         <Route exact path="/addNote" component={AddNotes} />
         <Route exact path="/createUser" component={CreateUser} />
+        <Route exact path="/craeteNotes" component={CreateNotes} />
+        <Route exact path="/updateNotes/:id" component={UpdateNotes} />
 
         <Redirect from="/" to="/login" component={Login} />
       </Switch>

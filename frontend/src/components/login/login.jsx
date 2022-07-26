@@ -12,6 +12,9 @@ import axios from 'axios';
 //import useHistory
 import { useHistory } from 'react-router-dom';
 
+//import popup
+import Popup from '../popup/popup';
+
 
 function Login() {
 
@@ -45,7 +48,7 @@ function Login() {
         //login 
         axios.post("http://localhost:8000/api/users/login", data).then((res) => {
 
-            alert("Login Successfully");
+            <Popup />
 
             //set token to a variable
             const token = res.data.data;
