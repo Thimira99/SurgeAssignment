@@ -63,36 +63,22 @@ module.exports.getOne = async (req, res) => {
 // CREATE single object
 module.exports.createUser = async (req, res) => {
 	try {
-		const { firstName, lastName, email, dateOfBirth, mobile, status, password, accountType } = req.body;
-
-		const data = new userModel({
-			firstName,
-			lastName,
-			email,
-			dateOfBirth,
-			mobile,
-			status,
-			password,
-			accountType
-		});
-
+		// const { firstName, lastName, email, dateOfBirth, mobile, status, password, accountType } = req.body;
+		let user = req.body;
 		// const output = await service.create(req.body);
-		const output = await userModel.findOne({ email: data.email });
+		let output = await userModel.findOne({ email: user.email });
 
 		if (output) {
-			return res.status(422).send({ message: "User exist", status: false });
+			return res.status(422).send({ status: false, message: "User exist" });
 		} else {
-			if (data.accountType !== 'student') {
-				data.password = createPasswordHash(data.password);
-			} else {
-				data.password = shortid.generate();
-			}
-
-			data.save();
+			user.password = shortid.generate();
+			user = new userModel(user);
+			await user.save();
 		}
+
 		return res.json({
 			status: true,
-			data: data,
+			data: user,
 		});
 	} catch (error) {
 		return res.status(422).json({
@@ -183,8 +169,7 @@ module.exports.login = async (req, res) => {
 module.exports.put = async (req, res) => {
 	try {
 		const data = req.body;
-		data.dateOfBirth = Number(new Date(data.dateOfBirth));
-		console.log(data);
+		data.id = req.params.id;
 
 		if (!data.status) {
 			if (!data.password) {

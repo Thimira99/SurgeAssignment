@@ -31,7 +31,8 @@ router
 
 // create object
 router.route(users_create.path).post(
-	// validator.validateBodyWithToken(schema.create, users_create.granted),
+	validator.validateHeader(users_create.granted),
+	validator.validateBody(schema.create),
 	controller.createUser
 );
 

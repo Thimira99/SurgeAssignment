@@ -13,6 +13,7 @@ const permission = require('../services/accessService');
 
 // validate token
 const getTokenFromHeader = (req) => {
+
 	if (
 		req.headers.authorization &&
 		req.headers.authorization.split(' ')[0] === 'Token'
@@ -41,7 +42,6 @@ module.exports.validateBody = function (schema) {
 // validate the API request header
 module.exports.validateHeader = (grantedArray) => {
 	return (req, res, next) => {
-		// eslint-disable-next-line consistent-return
 		return jwt.verify(getTokenFromHeader(req), secret, async (err, decoded) => {
 			if (err) {
 				return res.status(422).json({

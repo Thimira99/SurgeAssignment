@@ -10,13 +10,11 @@ module.exports.create = joi.object().keys({
 	dateOfBirth: joi.string(),
 	email: joi.string().required(),
 	mobile: joi.string(),
-	password: joi.string().required(),
 	accountType: joi.string().valid(permissionList.admin, permissionList.student),
 });
 
 // update object schema
 module.exports.put = joi.object().keys({
-	id: joi.string().required().max(24).min(24),
 	firstName: joi.string(),
 	lastName: joi.string(),
 	dateOfBirth: joi.string(),
