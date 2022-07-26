@@ -1,5 +1,5 @@
 const express = require('express');
-const { addNote, getNotesById, deleteNoteById, updateNoteById } = require('./notes.controller');
+const { addNote, getNotesByUserId, deleteNoteById, updateNoteById, getNotesById } = require('./notes.controller');
 
 // user router
 const router = express.Router();
@@ -7,7 +7,10 @@ const router = express.Router();
 //add Notes
 router.route('/add').post(addNote);
 
-//get Notes By Id
+//get Notes By User Id
+router.route('/getByUserId/:id').get(getNotesByUserId);
+
+//get Notes By  Id
 router.route('/getById/:id').get(getNotesById);
 
 //delete notes by id
