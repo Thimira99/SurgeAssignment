@@ -50,6 +50,7 @@ module.exports.getAll = async (req, res) => {
 module.exports.getOne = async (req, res) => {
 	try {
 		const output = await userModel.findById(req.params.id);
+
 		return res.json({
 			status: true,
 			data: output,
@@ -66,9 +67,9 @@ module.exports.getOne = async (req, res) => {
 // CREATE single object
 module.exports.createUser = async (req, res) => {
 	try {
-		// const { firstName, lastName, email, dateOfBirth, mobile, status, password, accountType } = req.body;
+
 		let user = req.body;
-		// const output = await service.create(req.body);
+
 		let output = await userModel.findOne({ email: user.email });
 
 		if (output) {
@@ -92,8 +93,10 @@ module.exports.createUser = async (req, res) => {
 			from: 'thimiraamarakoon99@gmail.com',
 			to: user.email,
 			subject: 'Sending Password and Link',
-			text: `${user.password}
-			LOGIN URL: http://localhost:3000/login`
+			html: `<h1>Sending Password and Link</h1>
+				   <h3>Hi ${user.firstName}</h3>
+				   <p>Password: ${user.password}</p>
+				   <p>Login URL: http://localhost:3000/login</p>`
 		};
 
 		transporter.sendMail(mailOption, function (err, info) {
@@ -107,6 +110,7 @@ module.exports.createUser = async (req, res) => {
 		return res.json({
 			status: true,
 			data: user,
+			email: "Email Send"
 		});
 	} catch (error) {
 		return res.status(422).json({
