@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<div
+  data-testId="user"
+>
+  <nav
+    class="navbar navbar-expand-lg navbar-light bg-light"
+    id="mainNav"
+  >
+    <a
+      class="navbar-brand"
+      href="#"
+    >
+      Admin
+    </a>
+    <button
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      class="navbar-toggler"
+      data-target="#navbarNavAltMarkup"
+      data-toggle="collapse"
+      type="button"
+    >
+      <span
+        class="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      class="collapse navbar-collapse"
+    >
+      <div
+        class="navbar-nav"
+        id="navbarNavAltMarkup"
+      >
+        <a
+          class="nav-item nav-link active"
+          href="/getUsers"
+        >
+          User List
+        </a>
+        <a
+          class="nav-item nav-link"
+          href="/createUser"
+        >
+          Create User
+        </a>
+        <div
+          className="logout"
+        >
+          <span
+            class="nav-item nav-link"
+          >
+            Hello 
+          </span>
+          <button
+            className="btn btn-outline-danger"
+            onClick={[Function]}
+            style={
+              Object {
+                "marginLeft": "1rem",
+              }
+            }
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div
+    className="form_container"
+  >
+    <form
+      className="form"
+      onSubmit={[Function]}
+    >
+      <h1>
+        Create Account
+      </h1>
+      <input
+        className="input"
+        name="firstName"
+        onChange={[Function]}
+        placeholder="First Name"
+        required={true}
+        type="text"
+      />
+      <input
+        className="input"
+        name="lastName"
+        onChange={[Function]}
+        placeholder="Last Name"
+        required={true}
+        type="text"
+      />
+      <input
+        className="input"
+        name="email"
+        onChange={[Function]}
+        placeholder="Email"
+        required={true}
+        type="email"
+      />
+      <input
+        className="input"
+        name="date"
+        onChange={[Function]}
+        placeholder="Date Of Birth"
+        required={true}
+        type="date"
+      />
+      <input
+        className="input"
+        name="mobile"
+        onChange={[Function]}
+        placeholder="Mobile Number"
+        required={true}
+        type="text"
+      />
+      <input
+        className="input"
+        name="mobile"
+        onChange={[Function]}
+        placeholder="Account Type"
+        required={true}
+        type="text"
+      />
+      <button
+        className="greenBtn"
+        type="submit"
+      >
+        Create
+      </button>
+    </form>
+  </div>
+</div>
+`;

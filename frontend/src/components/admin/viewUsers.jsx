@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 
 //import bootstrap spinner
 import Spinner from 'react-bootstrap/Spinner';
-import Popup from '../popup/popup';
 
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -25,7 +24,7 @@ function ViewUsers() {
     //set user details
     const [data, setData] = useState([]);
 
-    //initializing loading variablr
+    //initializing loading variable
     const [loading, setLoading] = useState(true);
 
     //seraching
@@ -66,9 +65,9 @@ function ViewUsers() {
             {!loading ? <div className={view.view_container}>
                 <h1>View All Users</h1>
                 <input type="text" placeholder='Search...' onChange={(event) => { setSearch(event.target.value) }} style={{ marginBottom: "1rem" }} />
-                <div className={view.table}>
+                <div >
                     <table class="table table-light">
-                        <thead class="table-dark">
+                        <thead class="table-dark" >
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">First Name</th>
@@ -76,8 +75,8 @@ function ViewUsers() {
                                 <th scope="col">Status</th>
                             </tr>
                         </thead>
-                        <tbody>
 
+                        <tbody >
                             {data.filter(value => {
                                 if (search === "") {
                                     return value;
@@ -85,8 +84,10 @@ function ViewUsers() {
                                     return value;
                                 }
                                 return null;
+
                             }).map((user, index) => (
-                                <tr id={view.viewList} onClick={() => handlePopup(user)}>
+
+                                <tr onClick={() => handlePopup(user)} style={{ cursor: "pointer" }}>
                                     <th scope="row">{++index}</th>
                                     <td>{user.firstName}</td>
                                     <td>{user.email}</td>
@@ -95,8 +96,8 @@ function ViewUsers() {
                                 </tr>
                             ))}
 
-
                         </tbody>
+
                     </table>
 
                     {openModal && <Modal

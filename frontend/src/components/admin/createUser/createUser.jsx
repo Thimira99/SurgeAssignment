@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 import createStyles from './createUser.module.scss';
 
-import Navbar from './adminNavbar/navbar';
+import Navbar from '../adminNavbar/navbar';
 import axios from 'axios';
-import { createHeader } from './createHeader';
+import { createHeader } from '../createHeader';
 import { useHistory } from 'react-router-dom';
-import { toastMsg } from '../toast';
+import { toastMsg } from '../../toast';
 
 function CreateUser() {
 
@@ -78,7 +78,7 @@ function CreateUser() {
     }
 
     return (
-        <div>
+        <div >
             <Navbar firstName={LfirstName} />
             <div className={createStyles.form_container}>
                 <form className={createStyles.form} onSubmit={handleSubmit}>

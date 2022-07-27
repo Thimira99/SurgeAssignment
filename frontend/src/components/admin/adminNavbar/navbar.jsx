@@ -15,17 +15,17 @@ function Navbar({ firstName }) {
     }
 
     return (
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" id={styles.mainNav}>
-            <a class="navbar-brand" href="#">Admin</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light" id={styles.mainNav}>
+            <a className="navbar-brand" href="#">Admin</a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse">
-                <div class="navbar-nav" id={styles.navbarNavAltMarkup}>
-                    <a class="nav-item nav-link active" href="/getUsers">User List</a>
-                    <a class="nav-item nav-link" href="/createUser">Create User</a>
+            <div className="collapse navbar-collapse">
+                <div className="navbar-nav" id={styles.navbarNavAltMarkup}>
+                    <a className="nav-item nav-link active" href="/getUsers">User List</a>
+                    <a className="nav-item nav-link" href="/createUser">Create User</a>
                     <div className={styles.logout}>
-                        <span class="nav-item nav-link">Hello {firstName}</span>
+                        <span className="nav-item nav-link">Hello {firstName}</span>
                         <button onClick={logout} className='btn btn-outline-danger' style={{ marginLeft: "1rem" }}>Logout</button>
                     </div>
 

@@ -5,7 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './components/login/login';
 import ViewUser from './components/admin/viewUsers';
-import CreateUser from './components/admin/createUser';
+import CreateUser from './components/admin/createUser/createUser';
 import UpdateUser from './components/updateUser/updateUser';
 import AddNotes from './components/student/addNotes';
 
