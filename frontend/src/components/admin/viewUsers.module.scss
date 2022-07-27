@@ -1,14 +1,18 @@
 .view_container {
+    width: 70%;
     margin-top: 9rem;
     flex: 2;
     display: flex;
     flex-direction: column;
+    margin: auto;
+    margin-top: 10rem;
     align-items: center;
     justify-content: center;
     background-color: grey;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 
-
-
+    #viewList {
+        cursor: pointer;
+    }
 }

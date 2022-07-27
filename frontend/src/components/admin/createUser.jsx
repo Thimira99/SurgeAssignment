@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import createStyles from './createUser.module.scss';
 
@@ -6,6 +6,7 @@ import Navbar from './adminNavbar/navbar';
 import axios from 'axios';
 import { createHeader } from './createHeader';
 import { useHistory } from 'react-router-dom';
+import { toastMsg } from '../toast';
 
 function CreateUser() {
 
@@ -66,7 +67,10 @@ function CreateUser() {
         const headers = createHeader();
 
         axios.post("http://localhost:8000/api/users/create", data, headers).then(res => {
-            alert("Successfully Created")
+            toastMsg("Successfully Created");
+            if (res.data.email === "Email Send") {
+                toastMsg("Email Send", 'info');
+            }
             history.push('/getUsers')
         }).catch(err => {
             console.log(err.response.data.msg);

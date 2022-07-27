@@ -1,6 +1,8 @@
 import axios from 'axios';
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+
+import { toastMsg } from '../toast';
 
 import createStyles from './updateUser.module.scss';
 
@@ -76,7 +78,7 @@ function UpdateUser() {
         }
 
         axios.put(`http://localhost:8000/api/users/${id}`, data).then((res) => {
-            console.log(res.data)
+            toastMsg('Successfully Updated.')
             localStorage.removeItem('user');
             history.push('/login');
         }).catch(err => {

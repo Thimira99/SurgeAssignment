@@ -17,16 +17,24 @@ function App() {
   return (
     <Router>
       <Switch>
+        {/* login */}
         <Route exact path="/login" component={Login} />
-        <Route exact path="/updateUser" component={UpdateUser} />
+
+        {/* Admin Paths */}
         <Route exact path="/getUsers" component={ViewUser} />
-        <Route exact path="/addNote" component={AddNotes} />
         <Route exact path="/createUser" component={CreateUser} />
+
+        {/* student Paths */}
+        <Route exact path="/addNote" component={AddNotes} />
         <Route exact path="/craeteNotes" component={CreateNotes} />
         <Route exact path="/updateNotes/:id" component={UpdateNotes} />
 
+        {/* update User */}
+        <Route exact path="/updateUser" component={UpdateUser} />
+
         <Redirect from="/" to="/login" component={Login} />
       </Switch>
+
       <ToastContainer position="top-center"
         autoClose={2000}
         hideProgressBar={false} />

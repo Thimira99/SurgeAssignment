@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 //import axios
 import axios from 'axios';
@@ -21,6 +21,8 @@ import { Link } from 'react-router-dom';
 
 //import bootstrap spinner
 import Spinner from 'react-bootstrap/Spinner';
+
+//toast msg
 import { toastMsg } from '../toast';
 
 function AddNotes() {
@@ -30,7 +32,7 @@ function AddNotes() {
 
 
     const [firstName, setFirstName] = useState('');
-    const [id, setId] = useState('');
+    // const [id, setId] = useState('');
 
     const [notes, setNotes] = useState([]);
 
@@ -38,7 +40,6 @@ function AddNotes() {
         //get id and firstname from localstorage
         const { id, firstName } = JSON.parse(localStorage.getItem('user'));
 
-        setId(id);
         setFirstName(firstName);
 
         //get notes by student id
@@ -65,6 +66,8 @@ function AddNotes() {
                 // window.location.reload();
                 toastMsg('Successfully Deleted.');
             }
+
+            window.location.reload();
         }).catch(err => {
             toastMsg(err.response.data.msg, 'error');
         })

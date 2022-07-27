@@ -1,19 +1,35 @@
 import React, { Component, useState } from 'react';
 
-function Popup() {
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
+function Popup({ show }) {
+
+    const [newShow, setShow] = useState(show);
+
+    const handleClose = () => setShow(false);
+
 
     return (
-        <div className='modal'>
-            <div className='overlay'>
-
-            </div>
-            <div className='modal-content'>
-                <h2>Hellow Modal</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic dignissimos illum recusandae.</p>
-            </div>
-
-
-        </div>
+        <Modal
+            show={newShow}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+        >
+            <Modal.Header closeButton>
+                <Modal.Title>Hii</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                I will not close if you click outside me. Don't even try to press
+                escape key.
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                    Close
+                </Button>
+            </Modal.Footer>
+        </Modal>
     )
 }
 
