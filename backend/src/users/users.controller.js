@@ -32,8 +32,6 @@ module.exports.getAll = async (req, res) => {
 			status: true,
 			data: {
 				count: data.count,
-				totalCount: data.totalCount || 0,
-				statusCode: res.statusCode,
 				value: data.value,
 			},
 			all: data
