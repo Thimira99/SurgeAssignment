@@ -4,12 +4,17 @@ import React, { useEffect, useState } from 'react';
 //import bootstrap spinner
 import Spinner from 'react-bootstrap/Spinner';
 
+//import react bootstrap
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-
+//import admin navbar
 import Navbar from './adminNavbar/navbar';
+
+//import header
 import { createHeader } from './createHeader';
+
+//import styles
 import view from './viewUsers.module.scss';
 
 function ViewUsers() {
@@ -30,6 +35,7 @@ function ViewUsers() {
     //seraching
     const [search, setSearch] = useState('');
 
+    //popup data
     const [pData, setPdata] = useState();
 
     useEffect(() => {
@@ -37,6 +43,7 @@ function ViewUsers() {
 
         setFirstName(firstName);
 
+        //header
         const headers = createHeader();
 
         axios.get("http://localhost:8000/api/users/", headers).then(res => {
@@ -51,6 +58,7 @@ function ViewUsers() {
 
     }, [])
 
+    //handle popup
     function handlePopup(user) {
         setOpenModal(true);
 

@@ -11,6 +11,8 @@ import axios from 'axios';
 
 //import useHistory
 import { useHistory } from 'react-router-dom';
+
+//import toast msg
 import { toastMsg } from '../toast';
 
 function Login() {
@@ -41,6 +43,7 @@ function Login() {
         setPassword(event.target.value);
     }
 
+    //handle submit
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -57,6 +60,7 @@ function Login() {
             //set token to a variable
             const token = res.data.data;
 
+            //store user token in localstorage
             localStorage.setItem('user', JSON.stringify(jwt(token)));
             localStorage.setItem('Token', token);
 

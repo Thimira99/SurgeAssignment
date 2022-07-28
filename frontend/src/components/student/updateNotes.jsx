@@ -5,7 +5,7 @@ import { useHistory, useParams } from 'react-router-dom';
 //import bootstrap spinner
 import Spinner from 'react-bootstrap/Spinner';
 
-import addNote from './createNotes.module.scss';
+import updateNote from './updateNotes.module.scss';
 import { toastMsg } from '../toast';
 
 function UpdateNotes() {
@@ -65,10 +65,10 @@ function UpdateNotes() {
 
     return (
         <div>
-            {!loading ? <div className={addNote.add_container}>
-                <div className={addNote.addform_container}>
-                    <div className={addNote.form_container}>
-                        <form className={addNote.form} onSubmit={handleSubmit}>
+            {!loading ? <div className={updateNote.add_container}>
+                <div className={updateNote.addform_container}>
+                    <div className={updateNote.form_container}>
+                        <form className={updateNote.form} onSubmit={handleSubmit}>
                             <h1>Update Note</h1>
                             <input
                                 type='text'
@@ -77,7 +77,7 @@ function UpdateNotes() {
                                 value={title}
                                 onChange={handleTitle}
                                 required
-                                className={addNote.input}
+                                className={updateNote.input}
                             />
                             <label>Description</label>
                             <textarea
@@ -86,11 +86,11 @@ function UpdateNotes() {
                                 name="comment"
                                 value={description}
                                 onChange={handleDescription}
-                                className={addNote.input}
+                                className={updateNote.input}
                                 placeholder='Description'>
 
                             </textarea>
-                            <button type='submit' className={addNote.greenBtn}>Update</button>
+                            <button type='submit' className={updateNote.greenBtn}>Update</button>
                         </form>
                     </div>
                 </div>

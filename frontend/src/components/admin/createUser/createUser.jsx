@@ -3,15 +3,20 @@ import React, { useEffect, useState } from 'react';
 import createStyles from './createUser.module.scss';
 
 import Navbar from '../adminNavbar/navbar';
+
 import axios from 'axios';
+
 import { createHeader } from '../createHeader';
+
 import { useHistory } from 'react-router-dom';
+
 import { toastMsg } from '../../toast';
 
 function CreateUser() {
 
     const history = useHistory();
 
+    //initialize user variables
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -19,13 +24,16 @@ function CreateUser() {
     const [mobile, setMobile] = useState('');
     const [accountType, setAccountType] = useState('');
 
+    //initialize login user name
     const [LfirstName, setLFirstName] = useState('');
+
 
     useEffect(() => {
         const { firstName } = JSON.parse(localStorage.getItem('user'));
         setLFirstName(firstName);
     }, [])
 
+    //handle onChange
     function handleFirstName(event) {
         setFirstName(event.target.value);
     }
@@ -52,6 +60,7 @@ function CreateUser() {
         setAccountType(event.target.value)
     }
 
+    //Handle Submit
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -64,6 +73,7 @@ function CreateUser() {
             accountType
         };
 
+        //header
         const headers = createHeader();
 
         axios.post("http://localhost:8000/api/users/create", data, headers).then(res => {
@@ -73,7 +83,7 @@ function CreateUser() {
             }
             history.push('/getUsers')
         }).catch(err => {
-            console.log(err.response.data.msg);
+            toastMsg(err.response.data.message, 'error');
         })
     }
 
@@ -125,7 +135,7 @@ function CreateUser() {
                     />
                     <input
                         type='text'
-                        placeholder='Account Type'
+                        placeholder='Account Type(student/admin)'
                         onChange={handleAccountType}
                         name='mobile'
                         required

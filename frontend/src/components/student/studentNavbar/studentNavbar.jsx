@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { useHistory } from 'react-router-dom';
+
+//import toast msg
 import { toastMsg } from '../../toast';
 
 //import css
 import styles from './studentNavbar.module.scss';
 
 
-
 function Navbar({ firstName }) {
     const history = useHistory();
 
+    //handle Logout
     const logout = () => {
         localStorage.removeItem('user');
         history.push('/login')
