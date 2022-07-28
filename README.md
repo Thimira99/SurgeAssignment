@@ -49,3 +49,17 @@ Run Frontend
 ```bash
   npm start
 ```
+
+## Backend Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`HTTP_PORT`
+
+`DATABASE_URL`
+
+`APP_NAME`
+
+`SECRET`
+
+`SERVER_PATH`
