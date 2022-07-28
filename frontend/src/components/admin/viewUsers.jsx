@@ -46,6 +46,7 @@ function ViewUsers() {
         //header
         const headers = createHeader();
 
+        //get
         axios.get("http://localhost:8000/api/users/", headers).then(res => {
             setData(res.data.all);
             setLoading(false);

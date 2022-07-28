@@ -61,6 +61,7 @@ function AddNotes() {
     function handleDelete(id) {
         setLoading(true);
 
+        //delete
         axios.delete(`http://localhost:8000/api/notes/deleteById/${id}`).then(res => {
             if (res.data.status === true) {
                 // window.location.reload();

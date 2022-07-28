@@ -29,7 +29,10 @@ function CreateUser() {
 
 
     useEffect(() => {
+        //get firstname from local storage
         const { firstName } = JSON.parse(localStorage.getItem('user'));
+
+        //set firstname
         setLFirstName(firstName);
     }, [])
 
@@ -76,6 +79,7 @@ function CreateUser() {
         //header
         const headers = createHeader();
 
+        //post
         axios.post("http://localhost:8000/api/users/create", data, headers).then(res => {
             toastMsg("Successfully Created");
             if (res.data.email === "Email Send") {

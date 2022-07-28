@@ -1,14 +1,21 @@
-import axios from 'axios';
 import React, { Component, useEffect, useState } from 'react';
+
 import { useHistory } from 'react-router-dom';
+
+//import toast msg
 import { toastMsg } from '../toast';
 
+//import axios
+import axios from 'axios';
+
+//import add notes style
 import addNote from './createNotes.module.scss';
 
 function CreateNotes() {
 
     const history = useHistory();
 
+    //initialize variables
     const [userId, setId] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -21,6 +28,7 @@ function CreateNotes() {
     }, [])
 
 
+    //hanlde onchange
     function handleTitle(event) {
         setTitle(event.target.value);
     }
@@ -29,6 +37,7 @@ function CreateNotes() {
         setDescription(event.target.value);
     }
 
+    //handle submit
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -38,6 +47,7 @@ function CreateNotes() {
             description
         }
 
+        //post
         axios.post("http://localhost:8000/api/notes/add", data).then(res => {
             if (res.data.status === true) {
                 toastMsg("Note added Successfully")

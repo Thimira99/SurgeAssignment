@@ -39,6 +39,7 @@ function UpdateUser() {
         setAccountType(accountType);
     }, []);
 
+    //hanlde onchange
     function handleFirstName(event) {
         setFirstName(event.target.value);
     }
@@ -63,6 +64,7 @@ function UpdateUser() {
         setPassword(event.target.value);
     }
 
+    //handle submit
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -77,12 +79,13 @@ function UpdateUser() {
             accountType
         }
 
+        //put
         axios.put(`http://localhost:8000/api/users/${id}`, data).then((res) => {
             toastMsg('Successfully Updated.')
             localStorage.removeItem('user');
             history.push('/login');
         }).catch(err => {
-            console.log(err);
+            toastMsg(err, "error");
         })
     }
 

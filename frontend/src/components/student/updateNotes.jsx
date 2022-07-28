@@ -1,26 +1,36 @@
-import axios from 'axios';
 import React, { Component, useEffect, useState } from 'react';
+
 import { useHistory, useParams } from 'react-router-dom';
 
 //import bootstrap spinner
 import Spinner from 'react-bootstrap/Spinner';
 
+//import axios
+import axios from 'axios';
+
+//import update notes styles
 import updateNote from './updateNotes.module.scss';
+
+// import toast msg
 import { toastMsg } from '../toast';
 
 function UpdateNotes() {
 
     const history = useHistory();
 
+    //get id from params
+    const { id } = useParams();
+
+    //loading spinner variable
     const [loading, setLoading] = useState(true);
 
-    const { id } = useParams();
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
 
     useEffect(() => {
+        //get
         axios.get(`http://localhost:8000/api/notes/getById/${id}`).then(res => {
             setLoading(false);
             setTitle(res.data.data[0].title);
@@ -34,6 +44,7 @@ function UpdateNotes() {
     }, [])
 
 
+    //handle onChange
     function handleTitle(event) {
         setTitle(event.target.value);
     }
@@ -43,6 +54,7 @@ function UpdateNotes() {
 
     }
 
+    //handle submit
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -51,6 +63,7 @@ function UpdateNotes() {
             description
         }
 
+        //put
         axios.put(`http://localhost:8000/api/notes//updateById/${id}`, data).then(res => {
             if (res.data.status === true) {
                 history.push("/addNote");

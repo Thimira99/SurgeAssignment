@@ -53,7 +53,7 @@ function Login() {
             password
         };
 
-        //login 
+        //login post
         axios.post("http://localhost:8000/api/users/login", data).then((res) => {
 
             toastMsg('Login success.');
